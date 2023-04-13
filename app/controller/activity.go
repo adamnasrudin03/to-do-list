@@ -92,7 +92,7 @@ func (c *activityHandler) GetOne(ctx *gin.Context) {
 }
 
 func (c *activityHandler) Update(ctx *gin.Context) {
-	input := entity.Activity{}
+	input := dto.UpdateActivity{}
 	validate := validator.New()
 
 	ID, err := strconv.ParseUint(ctx.Param("id"), 10, 32)
