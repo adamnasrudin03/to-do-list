@@ -17,5 +17,6 @@ func WiringRepository(db *gorm.DB) *repository.Repositories {
 func WiringService(repo *repository.Repositories) *service.Services {
 	return &service.Services{
 		Activity: service.NewActivityService(repo.Activity),
+		Todo:     service.NewTodoService(repo.Todo, repo.Activity),
 	}
 }
