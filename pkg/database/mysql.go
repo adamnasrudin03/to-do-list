@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"adamnasrudin03/to-do-list/app/configs"
+	"adamnasrudin03/to-do-list/app/entity"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -32,7 +33,9 @@ func SetupMySQLConnection() *gorm.DB {
 
 	if configs.Dbconfig.DbIsMigrate {
 		//auto migration entity db
-		db.AutoMigrate()
+		db.AutoMigrate(
+			entity.Activity{},
+		)
 	}
 
 	log.Println("Connection Database Success!")
