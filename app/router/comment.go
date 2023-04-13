@@ -12,7 +12,7 @@ func ActivityRouter(e *gin.Engine, h controller.ActivityController) {
 
 		activityRoutes.POST("/", h.Create)
 		activityRoutes.GET("/", h.GetAll)
-		activityRoutes.PUT("/:id", h.Update)
+		activityRoutes.PATCH("/:id", h.Update)
 		activityRoutes.GET("/:id", h.GetOne)
 		activityRoutes.DELETE("/:id", h.Delete)
 	}
