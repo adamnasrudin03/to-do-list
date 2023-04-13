@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"adamnasrudin03/to-do-list/app/dto"
 	"adamnasrudin03/to-do-list/app/entity"
 	"adamnasrudin03/to-do-list/app/service"
 	"adamnasrudin03/to-do-list/pkg/helpers"
@@ -31,7 +32,7 @@ func NewActivityController(srv *service.Services) ActivityController {
 }
 
 func (c *activityHandler) Create(ctx *gin.Context) {
-	input := entity.Activity{}
+	input := dto.CreateActivity{}
 	validate := validator.New()
 
 	err := ctx.ShouldBindJSON(&input)
@@ -48,7 +49,12 @@ func (c *activityHandler) Create(ctx *gin.Context) {
 		return
 	}
 
-	res, httpStatus, status, err := c.Service.Activity.Create(ctx, input)
+	activity := entity.Activity{
+		Title: input.Title,
+		Email: input.Email,
+	}
+
+	res, httpStatus, status, err := c.Service.Activity.Create(ctx, activity)
 	if err != nil {
 		ctx.JSON(httpStatus, helpers.APIResponse(err.Error(), status, nil))
 		return
@@ -110,7 +116,12 @@ func (c *activityHandler) Update(ctx *gin.Context) {
 		return
 	}
 
-	res, httpStatus, status, err := c.Service.Activity.UpdateByID(ctx, ID, input)
+	activity := entity.Activity{
+		Title: input.Title,
+		Email: input.Email,
+	}
+
+	res, httpStatus, status, err := c.Service.Activity.UpdateByID(ctx, ID, activity)
 	if err != nil {
 		ctx.JSON(httpStatus, helpers.APIResponse(err.Error(), status, nil))
 		return
