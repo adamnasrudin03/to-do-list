@@ -35,6 +35,7 @@ func SetupMySQLConnection() *gorm.DB {
 		//auto migration entity db
 		db.AutoMigrate(
 			entity.Activity{},
+			entity.Todo{},
 		)
 	}
 
