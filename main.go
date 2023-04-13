@@ -23,6 +23,7 @@ var (
 	services = app.WiringService(repo)
 
 	activityController controller.ActivityController = controller.NewActivityController(services)
+	todoController     controller.TodoController     = controller.NewTodoController(services)
 )
 
 func main() {
@@ -40,6 +41,7 @@ func main() {
 
 	// Route here
 	routers.ActivityRouter(router, activityController)
+	routers.TodoRouter(router, todoController)
 
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, helpers.APIResponse("Page not found", "Not Found", nil))
