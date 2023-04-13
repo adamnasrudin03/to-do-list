@@ -49,9 +49,9 @@ func GetInstance() *Configs {
 
 			Dbconfig: DbConfig{
 				Host:        getEnv("MYSQL_HOST", "localhost"),
-				Port:        getEnv("MYSQL_PORT", "5432"),
-				Username:    getEnv("MYSQL_USER", "postgres"),
-				Password:    getEnv("MYSQL_PASSWORD", "postgres"),
+				Port:        getEnv("MYSQL_PORT", "3306"),
+				Username:    getEnv("MYSQL_USER", "root"),
+				Password:    getEnv("MYSQL_PASSWORD", ""),
 				Dbname:      getEnv("MYSQL_DBNAME", "test_db"),
 				DbIsMigrate: getEnv("DB_ISMIGRATE", "true") == "true",
 				DebugMode:   getEnv("DEBUG_MODE", "true") == "true",
