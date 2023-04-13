@@ -10,7 +10,7 @@ import (
 type ResponseDefault struct {
 	Status  string      `json:"status"`
 	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 // APIResponse is for generating template responses
