@@ -66,10 +66,18 @@ func (repo *activityRepo) GetByID(ctx *gin.Context, ID uint64) (result entity.Ac
 func (repo *activityRepo) UpdateByID(ctx *gin.Context, ID uint64, input entity.Activity) (result entity.Activity, err error) {
 	query := repo.DB.WithContext(ctx)
 
-	err = query.Clauses(clause.Returning{}).Model(&result).Where("id=?", ID).Updates(entity.Activity{}).Error
+	err = query.Clauses(clause.Returning{}).Model(&result).Where("id = ?", ID).Updates(entity.Activity{Title: input.Title, Email: input.Email}).Error
 	if err != nil {
 		log.Printf("[ActivityRepository-UpdateByID][%v] error: %+v \n", ID, err)
 		return result, err
+	}
+
+	if result.ID == 0 {
+		err = query.Where("id = ?", ID).Take(&result).Error
+		if err != nil {
+			log.Printf("[ActivityRepository-UpdateByID][%v] returning data: %+v \n", ID, err)
+			return result, err
+		}
 	}
 
 	return result, err
