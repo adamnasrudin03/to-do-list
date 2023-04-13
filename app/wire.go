@@ -10,6 +10,7 @@ import (
 func WiringRepository(db *gorm.DB) *repository.Repositories {
 	return &repository.Repositories{
 		Activity: repository.NewActivityRepository(db),
+		Todo:     repository.NewTodoRepository(db),
 	}
 }
 
